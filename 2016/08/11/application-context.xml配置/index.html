@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>spring相关知识 | wudz&#39;s blog</title>
+  <meta name="author" content="wudz">
+  
+  <meta name="description" content="试试看">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="spring相关知识"/>
+  <meta property="og:site_name" content="wudz&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="wudz&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">wudz&#39;s blog</a></h1>
+  <h2><a href="/">每天都要站在昨天前面</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-08-11T02:33:02.000Z"><a href="/2016/08/11/application-context.xml配置/">2016-08-11</a></time>
+      
+      
+  
+    <h1 class="title">spring相关知识</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="PropertyPlaceholderConfigurer"><a href="#PropertyPlaceholderConfigurer" class="headerlink" title="PropertyPlaceholderConfigurer"></a>PropertyPlaceholderConfigurer</h2><p>org.springframework.beans.factory.config.PropertyPlaceholderConfigurer</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"propertyConfigurer"</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/jdbc.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>说明：</strong>它是用来解析Java Properties属性文件值，并提供在spring配置期间替换使用属性值。<br>配置文件中可以使用<code>${hibernate.dialect}</code>方式引入属值的。<br><a id="more"></a><br>test[^test]</p>
+<h2 id="PropertiesFactoryBean"><a href="#PropertiesFactoryBean" class="headerlink" title="PropertiesFactoryBean"></a>PropertiesFactoryBean</h2><p>org.springframework.beans.factory.config.PropertiesFactoryBean</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"properties"</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertiesFactoryBean"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/jdbc.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/jeecms/jeecms.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/sms.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/plug/**/*.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">qualifier</span> <span class="attr">value</span>=<span class="string">"main"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>说明：</strong>根据所有list的属性合并成一个<code>Properties</code>对象，Java中可以引用该对象。<br>jeecms中定义了PropertyUtils类用来读取<code>Properties</code>对象的属性值。<br>通过属性方式使得项目更具有可配置性。</p>
+<h2 id="hibernate配置"><a href="#hibernate配置" class="headerlink" title="hibernate配置"></a>hibernate配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate3.LocalSessionFactoryBean"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappingLocations"</span> <span class="attr">value</span>=<span class="string">"#&#123;propertyUtils.getList('hibernate.hbm')&#125;"</span>/&gt;</span>	</div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernateProperties"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">		hibernate.dialect=$&#123;hibernate.dialect&#125;</div><div class="line">		hibernate.show_sql=false</div><div class="line">		hibernate.format_sql=false</div><div class="line">		hibernate.query.substitutions=true 1, false 0</div><div class="line">		hibernate.jdbc.batch_size=20</div><div class="line">		hibernate.cache.use_query_cache=true</div><div class="line">		<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--面向切面，使得增、删、改、查时可以自定义处理--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"entityInterceptor"</span>&gt;</span>   </div><div class="line">		<span class="tag">&lt;<span class="name">ref</span> <span class="attr">local</span>=<span class="string">"treeInterceptor"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--处理hibernate缓存--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cacheProvider"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">ref</span> <span class="attr">local</span>=<span class="string">"cacheProvider"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--大文件类型处理--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"lobHandler"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"lobHandler"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"lobHandler"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.support.lob.DefaultLobHandler"</span> <span class="attr">lazy-init</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheProvider"</span> <span class="attr">class</span>=<span class="string">"com.jeecms.common.hibernate3.SpringEhCacheProvider"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--该配置需要研究下--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/config/ehcache-hibernate.xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"diskStoreLocation"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/WEB-INF/cache/hibernate<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"treeInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.jeecms.common.hibernate3.TreeIntercptor"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置事务处理 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate3.HibernateTransactionManager"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sessionFactory"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 自动使用spring注解，例如：autowired， 另外如果设置了&lt;context:annotation-config/&gt;配置， 则可以不用设置--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></div><div class="line"><span class="comment">&lt;!--启用@Transaction注解--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="1-context-annotation-config与context-component-scan区别"><a href="#1-context-annotation-config与context-component-scan区别" class="headerlink" title="1. context:annotation-config与context:component-scan区别"></a>1. context:annotation-config与context:component-scan区别</h3><p><code>&lt;context:annotation-config /&gt;</code>： 支持对象通过注解方式注入，如果不设置则无法使用autowired。该配置不支持@Service @Controller等<br><code>&lt;context:component-scan&gt;</code>：首先包括了<code>&lt;context:annotation-config&gt;</code>的功能，另外支持注解方式注册bean对象，<br>即支持@Service @Controller等，该标记使用时需要声明扫描的包的属性<code>base-package=&quot;com.xxx&quot;</code></p>
+<h3 id="2-tx-annotation-driven-作用"><a href="#2-tx-annotation-driven-作用" class="headerlink" title="2. tx:annotation-driven 作用"></a>2. tx:annotation-driven 作用</h3><p> 启用@Transaction注解，  所有xx:annotation-driven都是支持注解</p>
+<h3 id="3-mvc-annotation-driven-作用"><a href="#3-mvc-annotation-driven-作用" class="headerlink" title="3. mvc:annotation-driven 作用"></a>3. mvc:annotation-driven 作用</h3><p> 启用注册@controller注解，实质上是注册了两个bean对象DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter。<br> 是spring MVC为@Controllers分发请求所必须的。<br>并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。</p>
+
+      
+    </div>
+    <footer>
+      <div class="alignright">
+  
+  <div class="tags">
+    <a href="/tags/jeecms/">jeecms</a>, <a href="/tags/spring/">spring</a>
+  </div>
+</div>
+      
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignright">
+  
+  &copy; 2016 wudz
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://libs.useso.com/js/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

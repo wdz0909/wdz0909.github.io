@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>web.xml配置 | wudz&#39;s blog</title>
+  <meta name="author" content="wudz">
+  
+  <meta name="description" content="试试看">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="web.xml配置"/>
+  <meta property="og:site_name" content="wudz&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="wudz&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">wudz&#39;s blog</a></h1>
+  <h2><a href="/">每天都要站在昨天前面</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-08-11T02:33:02.000Z"><a href="/2016/08/11/web.xml配置/">2016-08-11</a></time>
+      
+      
+  
+    <h1 class="title">web.xml配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="context-param配置说明"><a href="#context-param配置说明" class="headerlink" title="context-param配置说明"></a><strong>context-param配置说明</strong></h2><p><strong>web.xml配置如下：</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span></div><div class="line">        /WEB-INF/config/application-context.xml</div><div class="line">        /WEB-INF/config/cache-context.xml</div><div class="line">        /WEB-INF/config/captcha-context.xml</div><div class="line">        /WEB-INF/config/jeecms/jeecore-context.xml</div><div class="line">        /WEB-INF/config/jeecms/jeecms-context.xml</div><div class="line">        /WEB-INF/config/shiro-context.xml</div><div class="line">        /WEB-INF/config/plug/**/*-context.xml</div><div class="line">        /WEB-INF/config/quartz-task.xml</div><div class="line">    <span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong>说明：</strong><br><code>context-param</code>中设置的参数为web应用的初始化参数，以键值对方式呈现。<br>通过以下方式可读取<code>tontextparam</code>中的值:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String value = ServletContext.getInitParameter(<span class="string">"contextConfigLocation"</span>);</div></pre></td></tr></table></figure></p>
+<p>一般在<code>ServletContextListener</code>实现类中访问context-param参数值,<br>一个web程序就存在一个ServletContext对象,为所有servlet对象所共享，如多个servlet需要共享<br>数据可通过servletcontext。另外sevletcontext对象启动应用时创建，应用关闭时才释放。<br><a id="more"></a></p>
+<h2 id="listener"><a href="#listener" class="headerlink" title="listener"></a><strong>listener</strong></h2><p>监听器类似事件触发器，用来监听特定事件发生时执行相应的方法，在应用程序启动时监听器初始化，<br>当应用程序关闭时结束监听。监听器包括：</p>
+<ol>
+<li>ServletContextListener：当servletContext状态改变时触发</li>
+<li>HttpSessionListener：当session回话状态改变时触发</li>
+<li>ServletRequestListener：当servlet请求时触发</li>
+</ol>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a><strong>filter</strong></h2><p>filter过滤器，对特定的URL执行请求前的预处理，例如：权限控制、编码设置等，可以设置多个过滤器，<br>所有过滤器执行结束后，请求才转到servlet。过滤器在应用程序初始化时生成，应用程序关闭时释放。<br>过滤器需要配置<code>filter-mapping</code>,说明关联的URL.</p>
+<p><strong>filter包括的方法有：</strong></p>
+<ol>
+<li>init：初始化时调用，应用程序启动时调用一次</li>
+<li>doFilter： 每次请求提交时都要调用</li>
+<li>destroy：应用程序关闭时调用（只调用一次）</li>
+</ol>
+<h2 id="servlet"><a href="#servlet" class="headerlink" title="servlet"></a><strong>servlet</strong></h2><p>servlet对应的URL请求，包括的方法有：init，doGet等，<br>当servlet配置中包括<code>&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</code>时，<br>该servlet在应用程序启动时就被初始化，否则在被URL调用时才被初始化。</p>
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a><strong>执行顺序</strong></h2><p><strong>启动应用时：</strong></p>
+<ul>
+<li>ServletContext创建</li>
+<li>ServletContextListener-初始化方法调用</li>
+<li>Filter对象-初始化方法调用</li>
+<li>Servlet对象-初始化方法调用（load-on-startup）</li>
+</ul>
+<p><strong>请求URL时</strong></p>
+<ul>
+<li>ServletRequestListener-requestInitialized</li>
+<li>Filter过滤器-doFilter方法执行</li>
+<li>ServletRequestListener-requestDestroyed</li>
+</ul>
+<p><strong>关闭应用时</strong></p>
+<ul>
+<li>Servlet对象-destory方法调用</li>
+<li>Filter对象-destory方法调用</li>
+<li>ServletContextListener-contextDestroyed方法调用</li>
+</ul>
+<hr>
+<p>参考链接：</p>
+<ol>
+<li><a href="http://qtlkw.iteye.com/blog/2037493" target="_blank" rel="external">listener/filter/servlet加载顺序说明</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      <div class="alignright">
+  
+  <div class="tags">
+    <a href="/tags/jeecms/">jeecms</a>, <a href="/tags/spring/">spring</a>
+  </div>
+</div>
+      
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignright">
+  
+  &copy; 2016 wudz
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://libs.useso.com/js/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
